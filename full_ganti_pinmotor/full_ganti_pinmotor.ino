@@ -1,17 +1,21 @@
 #include <PS4Controller.h>
 
-#define MOTOR3_A 27 // Wheel 3
-#define MOTOR3_B 14
-#define MOTOR1_A 26 // Wheel 2
-#define MOTOR1_B 25
-#define MOTOR2_A 32 // Wheel 1
-#define MOTOR2_B 33
-#define MOTOR4_A 13 // Linear Actuator for Shooting
-#define MOTOR4_B 12
-#define MOTOR5_A 4 // Shooter
-#define MOTOR5_B 2  // Changed from 5 to 2 (pin 5 conflict)
-#define MOTOR6_A 18 // Changed from 6 to 18 (pin 6 doesn't exist)
-#define MOTOR6_B 19 // Changed from 7 to 19 (pin 7 doesn't exist)
+#define MOTOR3_A 25 // Wheel 3
+#define MOTOR3_B 26
+#define MOTOR1_A 12 // Wheel 2
+#define MOTOR1_B 13
+#define MOTOR2_A 17 // Wheel 1
+#define MOTOR2_B 16
+#define MOTOR4_A 6 // Linear Actuator for Shooting
+#define MOTOR4_B 7
+#define MOTOR5_A 27 // Shooter
+#define MOTOR5_B 14 
+#define MOTOR6_A 8 // Conveyor kanan
+#define MOTOR6_B 15
+#define MOTOR7_A 4 // conveyor kiri
+#define MOTOR7_B 5
+#define MOTOR8_A 33 // Naik kana conve bawah
+#define MOTOR8_B 32 
 
 float Vx = 0.0;
 float Vy = 0.0;
@@ -39,6 +43,10 @@ void setup() {
   pinMode(MOTOR5_B, OUTPUT);
   pinMode(MOTOR6_A, OUTPUT);
   pinMode(MOTOR6_B, OUTPUT);
+  pinMode(MOTOR7_A, OUTPUT);
+  pinMode(MOTOR7_B, OUTPUT);
+  pinMode(MOTOR8_A, OUTPUT);
+  pinMode(MOTOR8_B, OUTPUT);
 
   Serial.println("Starting PS4 controller setup...");
   
