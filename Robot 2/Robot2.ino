@@ -50,8 +50,8 @@ void setup() {
 void loop() {
   if (PS4.isConnected()) {
     // Map joystick values to motor speeds
-    Vx = map(PS4.LStickX(), -128, 127, -255, 255)/4;
-    Vy = map(PS4.LStickY(), -128, 127, -255, 255)/4;
+    Vx = map(PS4.LStickX(), -128, 127, -255, 255)/3;
+    Vy = map(PS4.LStickY(), -128, 127, -255, 255)/3;
     w = map(PS4.RStickX(), -128, 127, -180, 180)/5;
 
     // Calculate wheel velocities for omnidirectional movement
@@ -61,7 +61,7 @@ void loop() {
     
     // Shooter and conveyor controls
     if (PS4.R1()) {
-      v4 = 170; // If R1 is pressed, set shooter power to 127
+      v4 = 150; // If R1 is pressed, set shooter power to 127
     } else if (PS4.R2()) {
       v4 = PS4.R2Value(); // If R2 is pressed, use analog trigger value
     } else {
