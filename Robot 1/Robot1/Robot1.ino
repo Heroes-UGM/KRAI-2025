@@ -48,9 +48,9 @@ void setup() {
 void loop() {
   if (PS4.isConnected()) {
     // Map joystick values to motor speeds
-    Vx = map(PS4.RStickX(), -128, 127, -255, 255) / 1.5;
-    Vy = map(PS4.RStickY(), -128, 127, 255, -255) / 1.5;
-    w = map(PS4.LStickX(), -128, 127, -180, 180) / 2;
+    Vx = map(PS4.LStickX(), -128, 127, -255, 255) / 2; //1.5
+    Vy = map(PS4.LStickY(), -128, 127, 255, -255) / 2;
+    w = map(PS4.RStickX(), -128, 127, -180, 180) / 3;
 
     // Calculate wheel velocities for omni movement
     v1 = Vx + w;
@@ -67,8 +67,9 @@ void loop() {
     }
 
     // Shooter control
-    if (PS4.R2Value() > 0) {
-      shooterSpeed = map(PS4.R2Value(), 0, 255, 0, 255);
+    if (PS4.R2()) {
+      shooterSpeed = 220;
+      // shooterSpeed = map(PS4.R2Value(), 0, 255, 0, 255);
     } else if (PS4.R1()) {
       shooterSpeed = 50;
     } else {
@@ -76,11 +77,11 @@ void loop() {
     }
 
     // Conveyor control
-    if (PS4.L2()) {
+    if (PS4.L1()) {
       // Forward: left slightly slower
       conveyorLeftSpeed = 225;
       conveyorRightSpeed = 255;
-    } else if (PS4.L1()) {
+    } else if (PS4.L2()) {
       // Backward: right slightly slower
       conveyorLeftSpeed = -225;
       conveyorRightSpeed = -255;

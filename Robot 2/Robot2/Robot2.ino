@@ -60,10 +60,13 @@ void loop() {
     v3 = -Vx * cos(60 * PI / 180) + Vy * cos(30 * PI / 180) + w ;
     
     // Shooter and conveyor controls
-    if (PS4.R1()) {
+    if (PS4.R2()) {
       v4 = 150; // If R1 is pressed, set shooter power to 127
-    } else if (PS4.R2()) {
-      v4 = PS4.R2Value(); // If R2 is pressed, use analog trigger value
+    } else if (PS4.R1()) {
+      v4 = 100; // If R1 is pressed, set shooter power to 127  
+      // v4 = PS4.R1Value(); // If R2 is pressed, use analog trigger value
+    } else if (PS4.Triangle()){
+      v4 = 200; // If R1 is pressed, set shooter power to 127  
     } else {
       v4 = 0; // Otherwise, turn off
     }
