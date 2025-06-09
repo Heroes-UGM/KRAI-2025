@@ -48,9 +48,9 @@ void setup() {
 void loop() {
   if (PS4.isConnected()) {
     // Map joystick values to motor speeds
-    Vx = map(PS4.RStickX(), -128, 127, -255, 255) / 1.5;
-    Vy = map(PS4.RStickY(), -128, 127, 255, -255) / 1.5;
-    w = map(PS4.LStickX(), -128, 127, -180, 180) / 2;
+    Vx = map(PS4.LStickX(), -128, 127, -255, 255) / 2;
+    Vy = map(PS4.LStickY(), -128, 127, 255, -255) / 2;
+    w = map(PS4.RStickX(), -128, 127, -180, 180) / 2;
 
     // Calculate wheel velocities for omni movement
     v1 = Vx + w;
@@ -68,9 +68,9 @@ void loop() {
 
     // Shooter control
     if (PS4.R2Value() > 0) {
-      shooterSpeed = map(PS4.R2Value(), 0, 255, 0, 255);
+      shooterSpeed = map(PS4.R2Value(), 0, 255, 0, 180);
     } else if (PS4.R1()) {
-      shooterSpeed = 50;
+      shooterSpeed = 80;
     } else {
       shooterSpeed = 0;
     }
@@ -104,7 +104,7 @@ void loop() {
 
   // Drive motors
 // Apply deadzone of ±10 for base movement
-  controlMotor((abs(v1) > 22) ? v1 : 0, MOTOR1_A, MOTOR1_B);
+  controlMotor((abs(v1) > 24) ? v1 : 0, MOTOR1_A, MOTOR1_B);
   controlMotor((abs(v2) > 10) ? v2 : 0, MOTOR2_A, MOTOR2_B);
   controlMotor((abs(v3) > 10) ? v3 : 0, MOTOR3_A, MOTOR3_B);
 
