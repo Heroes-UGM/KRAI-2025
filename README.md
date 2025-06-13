@@ -1,5 +1,7 @@
 # 🏀 ABU Robocon 2025 – HEROES Team Codebase (Basketball Challenge)
 
+![Demo Robot 2](assets/robot2.gif)
+
 Welcome to the official code repository of **Team HEROES**, representing **Universitas Gadjah Mada** in the **ABU Robocon Indonesia 2025** competition. This year’s theme, *“Team Effort, Ultimate Success,”* challenges us to design two basketball-playing robots capable of navigating, shooting, and collaborating like true champs!
 
 ---
