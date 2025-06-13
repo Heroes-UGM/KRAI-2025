@@ -48,15 +48,12 @@ void setup() {
 void loop() {
   if (PS4.isConnected()) {
     // Map joystick values to motor speeds
-<<<<<<< HEAD:Robot 1/Robot1/Robot1.ino
     Vx = map(PS4.LStickX(), -128, 127, -255, 255) / 2; //1.5
     Vy = map(PS4.LStickY(), -128, 127, 255, -255) / 2;
     w = map(PS4.RStickX(), -128, 127, -180, 180) / 3;
-=======
     Vx = map(PS4.LStickX(), -128, 127, -255, 255) / 2;
     Vy = map(PS4.LStickY(), -128, 127, 255, -255) / 2;
     w = map(PS4.RStickX(), -128, 127, -180, 180) / 2;
->>>>>>> 540b34e9c3b3c4ef971eb6e17055ca634377c3a4:Robot 1/Robot1.ino
 
     // Calculate wheel velocities for omni movement
     v1 = Vx + w;
@@ -73,14 +70,11 @@ void loop() {
     }
 
     // Shooter control
-<<<<<<< HEAD:Robot 1/Robot1/Robot1.ino
     if (PS4.R2()) {
       shooterSpeed = 220;
       // shooterSpeed = map(PS4.R2Value(), 0, 255, 0, 255);
-=======
     if (PS4.R2Value() > 0) {
       shooterSpeed = map(PS4.R2Value(), 0, 255, 0, 180);
->>>>>>> 540b34e9c3b3c4ef971eb6e17055ca634377c3a4:Robot 1/Robot1.ino
     } else if (PS4.R1()) {
       shooterSpeed = 80;
     } else {
