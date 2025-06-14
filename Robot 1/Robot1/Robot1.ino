@@ -1,24 +1,24 @@
 #include <PS4Controller.h>
 
 // Wheel Motor Pins
-#define MOTOR1_A 26
-#define MOTOR1_B 25
-#define MOTOR2_A 17
-#define MOTOR2_B 16
-#define MOTOR3_A 14
-#define MOTOR3_B 27
-#define MOTOR4_A 19 // Linear Actuator for Shooting
-#define MOTOR4_B 15
+#define MOTOR1_A 27
+#define MOTOR1_B 13
+#define MOTOR2_A 22
+#define MOTOR2_B 23
+#define MOTOR3_A 21
+#define MOTOR3_B 19
+#define MOTOR4_A 18 // Linear Actuator for Shooting
+#define MOTOR4_B 17
 
 // Shooter Pins
-#define SHOOTER_A 32
-#define SHOOTER_B 33
+#define SHOOTER_A 2
+#define SHOOTER_B 0
 
 // Conveyor Pins
 #define R_CONV_A 5
 #define R_CONV_B 4
-#define L_CONV_A 12
-#define L_CONV_B 13
+#define L_CONV_A 5
+#define L_CONV_B 4
 
 float Vx = 0.0, Vy = 0.0, w = 0.0;
 float v1 = 0.0, v2 = 0.0, v3 = 0.0, v4 = 0.0;
@@ -48,9 +48,6 @@ void setup() {
 void loop() {
   if (PS4.isConnected()) {
     // Map joystick values to motor speeds
-    Vx = map(PS4.LStickX(), -128, 127, -255, 255) / 2; //1.5
-    Vy = map(PS4.LStickY(), -128, 127, 255, -255) / 2;
-    w = map(PS4.RStickX(), -128, 127, -180, 180) / 3;
     Vx = map(PS4.LStickX(), -128, 127, -255, 255) / 2;
     Vy = map(PS4.LStickY(), -128, 127, 255, -255) / 2;
     w = map(PS4.RStickX(), -128, 127, -180, 180) / 2;
@@ -70,11 +67,8 @@ void loop() {
     }
 
     // Shooter control
-    if (PS4.R2()) {
-      shooterSpeed = 220;
-      // shooterSpeed = map(PS4.R2Value(), 0, 255, 0, 255);
     if (PS4.R2Value() > 0) {
-      shooterSpeed = map(PS4.R2Value(), 0, 255, 0, 180);
+      shooterSpeed = map(PS4.R2Value(), 0, 255, 0, 125);
     } else if (PS4.R1()) {
       shooterSpeed = 80;
     } else {
@@ -82,11 +76,11 @@ void loop() {
     }
 
     // Conveyor control
-    if (PS4.L1()) {
+    if (PS4.L2()) {
       // Forward: left slightly slower
       conveyorLeftSpeed = 225;
       conveyorRightSpeed = 255;
-    } else if (PS4.L2()) {
+    } else if (PS4.L1()) {
       // Backward: right slightly slower
       conveyorLeftSpeed = -225;
       conveyorRightSpeed = -255;
@@ -96,7 +90,7 @@ void loop() {
     }
 
     // Debug Info
-    Serial.printf("Vx: %.2f\tVy: %.2f\tw: %.2f\t|| V1: %.2f\tV2: %.2f\tV3: %.2f\tV4: %.2f\tShooter: %.2f\tConv L: %.2f\tConv R: %.2f\t",
+    Serial.printf("Vx: %.2f\tVy: %.2f\tw: %.2f  \t|| V1: %.2f\tV2: %.2f\tV3: %.2f\tV4: %.2f\tShooter: %.2f\tConv L: %.2f\tConv R: %.2f\t",
                   Vx, Vy, w, v1, v2, v3, v4, shooterSpeed, conveyorLeftSpeed, conveyorRightSpeed);
     Serial.printf("Battery: %d", PS4.Battery());
     if (PS4.Charging()) Serial.print(" (Charging)");
