@@ -25,6 +25,8 @@ float v1 = 0.0, v2 = 0.0, v3 = 0.0, v4 = 0.0;
 float shooterSpeed = 0.0;
 float conveyorLeftSpeed = 0.0;
 float conveyorRightSpeed = 0.0;
+int mode = 0;
+bool lastTriangleState = false;
 
 void setup() {
   Serial.begin(115200);
@@ -46,12 +48,28 @@ void setup() {
 }
 
 void loop() {
+  bool currentTriangleState = PS4.Triangle();
   if (PS4.isConnected()) {
-    // Map joystick values to motor speeds
-    Vx = map(PS4.LStickX(), -128, 127, -255, 255) / 2;
-    Vy = map(PS4.LStickY(), -128, 127, 255, -255) / 2;
-    w = map(PS4.RStickX(), -128, 127, -180, 180) / 2;
 
+    
+  // debouncing Detect rising edge: when button is pressed now but wasn't before
+    if(currentTriangleState && !lastTriangleState){
+      mode = (mode == 0) ? 1 : 0; 
+    }
+
+    // Save current state for next loop iteration
+    lastTriangleState = currentTriangleState;
+
+    // Map joystick values to motor speeds
+    if(mode == 0){
+      Vx = map(PS4.LStickX(), -128, 127, -255, 255) / 2;
+      Vy = map(PS4.LStickY(), -128, 127, 255, -255) / 2;
+      w = map(PS4.RStickX(), -128, 127, -180, 180) / 2;
+    } else if (mode == 1) {
+      Vx = map(PS4.LStickX(), -128, 127, -255, 255) / 1.5;
+      Vy = map(PS4.LStickY(), -128, 127, 255, -255) / 1.5;
+      w = map(PS4.RStickX(), -128, 127, -180, 180) / 1.5;
+    }
     // Calculate wheel velocities for omni movement
     v1 = Vx + w;
     v2 = -Vx * cos(60 * PI / 180) - Vy * cos(30 * PI / 180) + w;
@@ -90,8 +108,8 @@ void loop() {
     }
 
     // Debug Info
-    Serial.printf("Vx: %.2f\tVy: %.2f\tw: %.2f  \t|| V1: %.2f\tV2: %.2f\tV3: %.2f\tV4: %.2f\tShooter: %.2f\tConv L: %.2f\tConv R: %.2f\t",
-                  Vx, Vy, w, v1, v2, v3, v4, shooterSpeed, conveyorLeftSpeed, conveyorRightSpeed);
+    Serial.printf("Vx: %.2f\tVy: %.2f\tw: %.2f  \t|| V1: %.2f\tV2: %.2f\tV3: %.2f\tV4: %.2f\tShooter: %.2f\tConv L: %.2f\tConv R: %.2f\tMode: %d\n",
+                  Vx, Vy, w, v1, v2, v3, v4, shooterSpeed, conveyorLeftSpeed, conveyorRightSpeed, mode);
     Serial.printf("Battery: %d", PS4.Battery());
     if (PS4.Charging()) Serial.print(" (Charging)");
     Serial.println();
