@@ -1,24 +1,24 @@
 #include <PS4Controller.h>
 
 // Wheel Motor Pins
-#define MOTOR1_A 27
-#define MOTOR1_B 13
-#define MOTOR2_A 22
-#define MOTOR2_B 23
-#define MOTOR3_A 21
-#define MOTOR3_B 19
-#define MOTOR4_A 18 // Linear Actuator for Shooting
-#define MOTOR4_B 17
+#define MOTOR1_A 32
+#define MOTOR1_B 33
+#define MOTOR2_A 25
+#define MOTOR2_B 26
+#define MOTOR3_A 14
+#define MOTOR3_B 27
+#define MOTOR4_A 12 // Linear Actuator for Shooting
+#define MOTOR4_B 13
 
 // Shooter Pins
-#define SHOOTER_A 2
-#define SHOOTER_B 0
+#define SHOOTER_A 16
+#define SHOOTER_B 17
 
 // Conveyor Pins
-#define R_CONV_A 5
-#define R_CONV_B 4
-#define L_CONV_A 5
-#define L_CONV_B 4
+#define R_CONV_A 4
+#define R_CONV_B 5
+#define L_CONV_A 18
+#define L_CONV_B 19
 
 float Vx = 0.0, Vy = 0.0, w = 0.0;
 float v1 = 0.0, v2 = 0.0, v3 = 0.0, v4 = 0.0;
