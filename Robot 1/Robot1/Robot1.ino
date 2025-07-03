@@ -100,7 +100,7 @@ void loop() {
 
     // Shooter
     if (PS4.R2Value() > 0) {
-      shooterSpeed = map(PS4.R2Value(), 0, 225, 0, 180);
+      shooterSpeed = map(PS4.R2Value(), 0, 225, 0, 150);
     } else if (PS4.R1()) {
       shooterSpeed = 80;
       // shooterSpeed = 80;
