@@ -58,7 +58,8 @@ void setup() {
     pinMode(motorPins[i], OUTPUT);
   }
 
-  PS4.begin("10:04:10:05:10:06");
+  // PS4.begin("10:04:10:05:10:06"); punya robot 1 asli 
+  PS4.begin("20:04:20:05:20:06"); // dari robot 2 
   Serial.println("PS4 ready to connect!");
 }
 
@@ -76,13 +77,13 @@ void loop() {
 
     // Movement control
     if (mode == 0) {
+      Vx = map(PS4.LStickX(), -128, 127, -255, 255) / 2.0;
+      Vy = map(PS4.LStickY(), -128, 127, 255, -255) / 2.0;
+      w  = map(PS4.RStickX(), -128, 127, -180, 180) / 2.0;
+    } else {
       Vx = map(PS4.LStickX(), -128, 127, -255, 255) / 1.0;
       Vy = map(PS4.LStickY(), -128, 127, 255, -255) / 1.0;
       w  = map(PS4.RStickX(), -128, 127, -180, 180) / 1.0;
-    } else {
-      Vx = map(PS4.LStickX(), -128, 127, -255, 255) / 0.5;
-      Vy = map(PS4.LStickY(), -128, 127, 255, -255) / 0.5;
-      w  = map(PS4.RStickX(), -128, 127, -180, 180) / 0.5;
     }
 
     v1 = Vx + w;
@@ -100,7 +101,7 @@ void loop() {
 
     // Shooter
     if (PS4.R2Value() > 0) {
-      shooterSpeed = map(PS4.R2Value(), 0, 225, 0, 150);
+      shooterSpeed = map(PS4.R2Value(), 0, 225, 0, 120); // tidak boleh di max nanti panas
     } else if (PS4.R1()) {
       shooterSpeed = 80;
       // shooterSpeed = 80;
