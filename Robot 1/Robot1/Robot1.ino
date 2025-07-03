@@ -76,13 +76,13 @@ void loop() {
 
     // Movement control
     if (mode == 0) {
-      Vx = map(PS4.LStickX(), -128, 127, -255, 255) / 2;
-      Vy = map(PS4.LStickY(), -128, 127, 255, -255) / 2;
-      w  = map(PS4.RStickX(), -128, 127, -180, 180) / 2;
-    } else {
       Vx = map(PS4.LStickX(), -128, 127, -255, 255) / 1.0;
       Vy = map(PS4.LStickY(), -128, 127, 255, -255) / 1.0;
       w  = map(PS4.RStickX(), -128, 127, -180, 180) / 1.0;
+    } else {
+      Vx = map(PS4.LStickX(), -128, 127, -255, 255) / 0.5;
+      Vy = map(PS4.LStickY(), -128, 127, 255, -255) / 0.5;
+      w  = map(PS4.RStickX(), -128, 127, -180, 180) / 0.5;
     }
 
     v1 = Vx + w;
@@ -100,7 +100,7 @@ void loop() {
 
     // Shooter
     if (PS4.R2Value() > 0) {
-      shooterSpeed = map(PS4.R2Value(), 0, 255, 0, 125);
+      shooterSpeed = map(PS4.R2Value(), 0, 225, 0, 180);
     } else if (PS4.R1()) {
       shooterSpeed = 80;
       // shooterSpeed = 80;
