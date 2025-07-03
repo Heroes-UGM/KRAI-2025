@@ -101,9 +101,9 @@ void loop() {
 
     // Shooter
     if (PS4.R2Value() > 0) {
-      shooterSpeed = map(PS4.R2Value(), 0, 225, 0, 120); // tidak boleh di max nanti panas
+      shooterSpeed = 140; // tidak boleh di max nanti panas
     } else if (PS4.R1()) {
-      shooterSpeed = 80;
+      shooterSpeed = 120;
       // shooterSpeed = 80;
     } else {
       shooterSpeed = 0;
