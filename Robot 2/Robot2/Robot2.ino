@@ -47,7 +47,8 @@ void setup() {
   Serial.println("Starting PS4 controller setup...");
   digitalWrite(pneumatic_A, LOW);
   digitalWrite(pneumatic_B, LOW);
-  PS4.begin("20:04:20:05:20:06");
+  // PS4.begin("20:04:20:05:20:06"); punya robot 2 asli
+  PS4.begin("10:04:10:05:10:06"); // dari robot 1
   Serial.println("PS4 controller initialized!");
   Serial.println("Please connect your PS4 controller...");
   // Serial.println("Press and hold PS + Share buttons simultaneously for 3 seconds");
